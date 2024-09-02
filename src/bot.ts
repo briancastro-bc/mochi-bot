@@ -73,7 +73,6 @@ start()
   .then(handleCommands)
   .then(handleEvents)
   .then(c => c.login(token))
-  .then((v) => console.log(v))
   .catch((err) => {
     console.log(err);
     process.exit(1)

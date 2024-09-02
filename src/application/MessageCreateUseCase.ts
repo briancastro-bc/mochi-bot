@@ -8,16 +8,16 @@ import { container, } from '@ioc/di';
 import { MessageCreatePort, } from '@application/ports/MessageCreatePort';
 
 export class MessageCreateUseCase implements MessageCreatePort {
+
   async execute(message: Message): Promise<void> {
+    if (message?.author?.bot || message?.system) return;
+
+
     const verification_channel_id = container
       .resolve<string>('verification_channel_id');
 
     const targetChannel = message.channelId;
     if (targetChannel !== verification_channel_id) return;
-
-    const isBotUser = message?.author?.bot;
-
-    if (isBotUser || message?.system) return;
 
     const content = message?.content;
 
@@ -106,7 +106,15 @@ export class MessageCreateUseCase implements MessageCreatePort {
     }
   }
 
-  transformValidUsername(username: string): string | null {
+  async executeCommand(message: Message): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+
+  async executeVerification(message: Message): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+
+  private transformValidUsername(username: string): string | null {
     const validatorRegex = /^[a-zA-Z]+[_ ]+[a-zA-Z]+$/;
     if (!validatorRegex.test(username)) return null;
 

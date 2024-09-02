@@ -12,11 +12,13 @@
     "dev": "pnpm build && nodemon --watch src ./dist/bot.js",
     "dev:ts": "ts-node-dev --respawn --transpile-only src/bot.ts",
     "dev:test": "tsc -w ./src/bot.ts && nodemon dist/bot.js",
-    "dev:tsx": "cross-env TS_NODE_PROJECT=tsconfig.node.json tsx -r tsconfig-paths/register --watch src/bot.ts"
+    "dev:tsx": "tsx --tsconfig ./tsconfig.node.json -r tsconfig-paths/register --watch src/bot.ts",
+    "dev:ts-node": "cross-env TS_NODE_PROJECT=tsconfig.node.json ts-node -r tsconfig-paths/register src/bot.ts"
   },
   "dependencies": {
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
+    "i18next": "^23.14.0",
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.8.0"
   },

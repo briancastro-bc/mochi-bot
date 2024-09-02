@@ -1,5 +1,9 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig.json",
+	"ts-node": {
+		"esm": true,
+		"experimentalSpecifierResolution": "node"
+	},
 	"compilerOptions": {
 		"composite": true,
 		"allowUnreachableCode": false,
@@ -10,11 +14,11 @@
 		"noImplicitReturns": true,
 		"noPropertyAccessFromIndexSignature": false,
 		"noUncheckedIndexedAccess": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
 		"strict": true,
 		"typeRoots": [
-			"./src/@types",
+			"./@types",
 			"./node_modules/@types"
 		],
 		"allowArbitraryExtensions": false,
@@ -33,21 +37,39 @@
 		"removeComments": false,
 		"sourceMap": true,
 		"allowSyntheticDefaultImports": true,
-		"esModuleInterop": false,
+		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
 		"experimentalDecorators": true,
-		"lib": ["ESNext", "esnext.disposable"],
+		"emitDecoratorMetadata": true,
+		"lib": [
+			"ESNext",
+			"esnext.disposable"
+		],
 		"target": "ESNext",
 		"useDefineForClassFields": true,
 		"baseUrl": "./",
 		"paths": {
-			"@src/*": ["./src/*"],
-			"@ioc/*": ["./src/ioc/*"],
-			"@shared/*": ["./src/shared/*"],
-			"@application/*": ["./src/application/*"]
-		}
+			"@src/*": [
+				"./src/*"
+			],
+			"@ioc/*": [
+				"./src/ioc/*"
+			],
+			"@shared/*": [
+				"./src/shared/*"
+			],
+			"@application/*": [
+				"./src/application/*"
+			]
+		},
+		"skipLibCheck": true
 	},
-	"include": ["src"],
-	"exclude": ["node_modules"]
+	"include": [
+		"src",
+		"./@types/**/*"
+	],
+	"exclude": [
+		"node_modules"
+	]
 }
