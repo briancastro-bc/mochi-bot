@@ -17,6 +17,7 @@ export class ClientReadyUseCase implements ClientReadyPort {
       type: ActivityType.Playing,
       url: 'https://example.com'
     });
+    await client?.user?.setUsername('CNN Legacy ES');
 
     const guild = await client?.guilds?.fetch(guild_id);
     const language = guild?.preferredLocale;

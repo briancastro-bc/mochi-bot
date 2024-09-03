@@ -4,6 +4,7 @@ import { InteractionCreatePort, } from '@application/ports/InteractionCreatePort
 
 export class InteractionCreateUseCase implements InteractionCreatePort {
   async execute(interaction: BaseInteraction): Promise<void> {
+    // console.log('interaction', interaction);
     if (!interaction) return;
 
     if (!interaction.isChatInputCommand()) return;

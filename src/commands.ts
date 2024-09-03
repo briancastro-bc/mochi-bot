@@ -1,4 +1,14 @@
-import { Interaction, SlashCommandBuilder, } from 'discord.js';
+import { 
+  Message,
+  Interaction, 
+  SlashCommandBuilder, 
+  ApplicationCommandType,
+  MessageType,
+} from 'discord.js';
+
+import { container, } from '@ioc/di';
+
+import { InteractionCreatePort, } from '@application/ports/InteractionCreatePort';
 
 export type Command = {
   data: SlashCommandBuilder;
@@ -11,9 +21,23 @@ export const commands = <Array<Command>>[
       .setName('ping')
       .setDescription('Check bot availability'),
     async execute (interaction) {
-      if (!interaction.isRepliable()) return;
+      if (interaction.isCommand && interaction.isCommand()) {
+        console.log('interaction commmand');
+      }
 
+      if (interaction.isChatInputCommand && interaction.isChatInputCommand()) {
+        console.log('interaction chat input');
+      }
+
+      if (interaction.type === MessageType.Default) {
+        console.log('interaction message');
+      }
+
+      console.log('interaction', interaction);
       await interaction.reply('Pong!');
+      // const useCase = container
+      //   .resolve<InteractionCreatePort>('InteractionCreate');
+      // await useCase.execute(interaction);
     },
   },
 ];

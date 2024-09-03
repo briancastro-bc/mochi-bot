@@ -12,6 +12,7 @@ import { constructor, } from 'tsyringe/dist/typings/types';
 
 import { ClientReadyUseCase, } from '@application/ClientReadyUseCase';
 import { MessageCreateUseCase, } from '@application/MessageCreateUseCase';
+import { GuildMemberAddUseCase, } from '@application/GuildMemberAddUseCase';
 import { InteractionCreateUseCase, } from '@application/InteractionCreateUseCase';
 
 export type InjectableType = 'constructor' 
@@ -32,6 +33,13 @@ const dependencies: Array<Injectable> = [
     token: 'token',
     provider: {
       useValue: process.env.DISCORD_BOT_TOKEN!,
+    },
+    type: 'ValueProvider',
+  },
+  {
+    token: 'prefix',
+    provider: {
+      useValue: process.env.DISCORD_BOT_PREFIX,
     },
     type: 'ValueProvider',
   },
@@ -88,6 +96,13 @@ const dependencies: Array<Injectable> = [
     token: 'MessageCreate',
     provider: {
       useClass: MessageCreateUseCase,
+    },
+    type: 'ClassProvider',
+  },
+  {
+    token: 'GuildMemberAdd',
+    provider: {
+      useClass: GuildMemberAddUseCase,
     },
     type: 'ClassProvider',
   }
