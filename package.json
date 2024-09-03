@@ -7,8 +7,11 @@
     "name": "Brian Castro Bedoya"
   },
   "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18",
+    "npm": ">=8"
+  },
   "scripts": {
-    "build": "node esbuild.config.js",
     "dev": "pnpm build && nodemon --watch src ./dist/bot.js",
     "dev:ts": "ts-node-dev --respawn --transpile-only src/bot.ts",
     "dev:test": "tsc -w ./src/bot.ts && nodemon dist/bot.js",
