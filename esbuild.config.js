@@ -4,7 +4,7 @@ const { resolve, } = require('node:path');
 (async () => {
   await esbuild.build({
     entryPoints: [resolve(__dirname, 'src/bot.ts')],
-    bundle: false,
+    bundle: true,
     minify: false,
     sourcemap: true,
     platform: 'node',
