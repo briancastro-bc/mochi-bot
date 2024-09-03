@@ -3,10 +3,10 @@ import 'reflect-metadata';
 
 import {
   REST, 
+  Routes,
   Client,
   Collection, 
   GatewayIntentBits,
-  Routes,
 } from 'discord.js';
 
 import * as ioc from '@ioc/di';
