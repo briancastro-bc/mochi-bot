@@ -12,11 +12,9 @@
     "npm": ">=8"
   },
   "scripts": {
-    "dev": "pnpm build && nodemon --watch src ./dist/bot.js",
-    "dev:ts": "ts-node-dev --respawn --transpile-only src/bot.ts",
-    "dev:test": "tsc -w ./src/bot.ts && nodemon dist/bot.js",
-    "dev:tsx": "tsx --tsconfig ./tsconfig.node.json -r tsconfig-paths/register --watch src/bot.ts",
-    "dev:ts-node": "cross-env TS_NODE_PROJECT=tsconfig.node.json ts-node -r tsconfig-paths/register src/bot.ts"
+    "build": "node esbuild.config.js",
+    "start": "pnpm build && node dist/src/bot.js",
+    "dev:tsx": "tsx -r tsconfig-paths/register --watch src/bot.ts"
   },
   "dependencies": {
     "discord.js": "^14.15.3",
@@ -30,8 +28,6 @@
     "cross-env": "^7.0.3",
     "esbuild": "^0.23.1",
     "nodemon": "^3.1.4",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.0",
     "typescript": "^5.5.4"
