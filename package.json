@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "node esbuild.config.js",
-    "start": "npm run build && node dist/src/bot.js",
+    "start": "node dist/src/bot.js",
     "dev:tsx": "tsx -r tsconfig-paths/register --watch src/bot.ts"
   },
   "dependencies": {
