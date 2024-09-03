@@ -15,10 +15,10 @@ const { resolve, } = require('node:path');
     external: ['discord.js'],
     logLevel: 'info',
     alias: {
-      '@src': resolve(__dirname, './src'),
-      '@ioc': resolve(__dirname, './src/ioc'),
-      '@shared': resolve(__dirname, './src/shared'),
-      '@application': resolve(__dirname, './src/application'),
+      '@src': resolve(__dirname, 'src'),
+      '@ioc': resolve(__dirname, 'src/ioc'),
+      '@shared': resolve(__dirname, 'src/shared'),
+      '@application': resolve(__dirname, 'src/application'),
     }
   }).catch((err) => {
     console.error(err);
