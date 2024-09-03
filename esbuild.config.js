@@ -1,6 +1,5 @@
 const esbuild = require('esbuild');
 const { resolve, } = require('node:path');
-// import * as esbuild from 'esbuild';
 
 (async () => {
   await esbuild.build({
