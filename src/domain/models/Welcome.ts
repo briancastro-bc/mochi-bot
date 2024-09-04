@@ -3,9 +3,9 @@ export interface Welcome {
   channelId: string;
   title: string;
   authorName: string;
-  authorAvatarUrl: string;
+  authorAvatarUrl?: string;
   roleId?: string; 
   thumbnail?: string;
   description: string;
-  footer: string;
+  footer?: string;
 }

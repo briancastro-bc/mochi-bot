@@ -16,7 +16,10 @@ const { resolve, } = require('node:path');
     alias: {
       '@src': resolve(__dirname, 'src'),
       '@ioc': resolve(__dirname, 'src/ioc'),
+      '@db': resolve(__dirname, 'src/database'),
+      '@assets': resolve(__dirname, 'src/assets'),
       '@shared': resolve(__dirname, 'src/shared'),
+      '@domain': resolve(__dirname, 'src/domain'),
       '@application': resolve(__dirname, 'src/application'),
     }
   }).catch((err) => {

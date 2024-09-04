@@ -10,6 +10,8 @@ import {
 } from 'tsyringe';
 import { constructor, } from 'tsyringe/dist/typings/types';
 
+import database, { Mongoose, } from '@db/client';
+
 import { ClientReadyUseCase, } from '@application/ClientReadyUseCase';
 import { MessageCreateUseCase, } from '@application/MessageCreateUseCase';
 import { GuildMemberAddUseCase, } from '@application/GuildMemberAddUseCase';
@@ -79,6 +81,13 @@ const dependencies: Array<Injectable> = [
     type: 'ValueProvider',
   },
   {
+    token: 'database',
+    provider: {
+      useFactory: (): Mongoose => database,
+    },
+    type: 'FactoryProvider',
+  },
+  {
     token: 'ClientReady',
     provider: {
       useClass: ClientReadyUseCase,
@@ -105,7 +114,7 @@ const dependencies: Array<Injectable> = [
       useClass: GuildMemberAddUseCase,
     },
     type: 'ClassProvider',
-  }
+  },
 ];
 
 function registerDependency(dependency: Injectable): void {

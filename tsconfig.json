@@ -50,24 +50,20 @@
 		"useDefineForClassFields": true,
 		"baseUrl": "./",
 		"paths": {
-			"@src/*": [
-				"./src/*"
-			],
-			"@ioc/*": [
-				"./src/ioc/*"
-			],
-			"@shared/*": [
-				"./src/shared/*"
-			],
-			"@application/*": [
-				"./src/application/*"
-			]
+			"@src/*": ["./src/*"],
+			"@ioc/*": ["./src/ioc/*"],
+			"@db/*": ["./src/database/*"],
+			"@assets/*": ["./src/assets/*"],
+			"@shared/*": ["./src/shared/*"],
+			"@domain/*": ["./src/domain/*"],
+			"@application/*": ["./src/application/*"]
 		},
 		"skipLibCheck": true
 	},
 	"include": [
-		"src",
-		"./@types/**/*"
+		"./src/**/*",
+		"./@types/**/*",
+		"./src/assets/locales/*.json"
 	],
 	"exclude": [
 		"node_modules"
