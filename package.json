@@ -11,6 +11,7 @@
     "node": ">=16",
     "npm": ">=6"
   },
+  "type": "module",
   "scripts": {
     "build": "node esbuild.config.js",
     "start": "node dist/src/bot.js",

@@ -54,9 +54,10 @@
 			"@ioc/*": ["./src/ioc/*"],
 			"@db/*": ["./src/database/*"],
 			"@assets/*": ["./src/assets/*"],
-			"@shared/*": ["./src/shared/*"],
-			"@domain/*": ["./src/domain/*"],
-			"@application/*": ["./src/application/*"]
+			"@shared/*": ["./src/contexts/shared/*"],
+			"@domain/*": ["./src/contexts/bot/domain/*"],
+			"@application/*": ["./src/contexts/bot/application/*"],
+			"@infrastructure/*": ["./src/contexts/bot/infrastructure/*"]
 		},
 		"skipLibCheck": true
 	},

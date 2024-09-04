@@ -18,9 +18,10 @@ const { resolve, } = require('node:path');
       '@ioc': resolve(__dirname, 'src/ioc'),
       '@db': resolve(__dirname, 'src/database'),
       '@assets': resolve(__dirname, 'src/assets'),
-      '@shared': resolve(__dirname, 'src/shared'),
-      '@domain': resolve(__dirname, 'src/domain'),
-      '@application': resolve(__dirname, 'src/application'),
+      '@shared': resolve(__dirname, 'src/contexts/shared'),
+      '@domain': resolve(__dirname, 'src/contexts/bot/domain'),
+      '@application': resolve(__dirname, 'src/contexts/bot/application'),
+      '@infrastructure': resolve(__dirname, 'src/contexts/bot/infrastructure'),
     }
   }).catch((err) => {
     console.error(err);

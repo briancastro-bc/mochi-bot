@@ -5,10 +5,12 @@ import {
   GuildMember,
   ClientEvents,
   BaseInteraction,
+  Guild,
 } from 'discord.js';
 
 import { container, } from '@ioc/di';
 
+import { GuildCreatePort, } from '@application/ports/GuildCreatePort';
 import { ClientReadyPort, } from '@application/ports/ClientReadyPort';
 import { MessageCreatePort } from '@application/ports/MessageCreatePort';
 import { GuildMemberAddPort } from '@application/ports/GuildMemberAddPort';
@@ -31,12 +33,43 @@ export const events = <Array<Event>>[
     },
   },
   {
+    name: Events.GuildCreate,
+    once: false,
+    async execute(guild) {
+      const useCase = container
+        .resolve<GuildCreatePort>('GuildCreate');
+      await useCase.execute(guild as Guild);
+    },
+  },
+  {
+    name: Events.GuildUpdate,
+    once: false,
+    async execute(guild) {
+      console.log('guild updated', guild);
+    },
+  },
+  {
+    name: Events.GuildDelete,
+    once: false,
+    async execute(guild) {
+      console.log('guild removed', guild);
+    },
+  },
+  {
+    name: Events.TypingStart,
+    once: false,
+    async execute(channel, user) {
+      console.log('typing channel', channel);
+      console.log('typing user', user);
+    },
+  },
+  {
     name: Events.GuildMemberAdd,
     once: false,
-    async execute(interaction) {
+    async execute(member) {
       const useCase = container
         .resolve<GuildMemberAddPort>('GuildMemberAdd');
-      await useCase.execute(interaction as GuildMember);
+      await useCase.execute(member as GuildMember);
     },
   },
   {

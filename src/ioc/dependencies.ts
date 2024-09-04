@@ -1,6 +1,7 @@
 import { 
   container, 
   Provider, 
+  Lifecycle,
   InjectionToken, 
   RegistrationOptions,
   TokenProvider,
@@ -10,12 +11,14 @@ import {
 } from 'tsyringe';
 import { constructor, } from 'tsyringe/dist/typings/types';
 
-import database, { Mongoose, } from '@db/client';
-
+import { GuildCreateUseCase, } from '@application/GuildCreateUseCase';
 import { ClientReadyUseCase, } from '@application/ClientReadyUseCase';
 import { MessageCreateUseCase, } from '@application/MessageCreateUseCase';
 import { GuildMemberAddUseCase, } from '@application/GuildMemberAddUseCase';
 import { InteractionCreateUseCase, } from '@application/InteractionCreateUseCase';
+
+import { DatabaseGuildRepository, } from '@infrastructure/repositories/DatabaseGuildRepository';
+import { DatabaseWelcomeRepository, } from '@infrastructure/repositories/DatabaseWelcomeRepository';
 
 export type InjectableType = 'constructor' 
 | 'ValueProvider' 
@@ -81,11 +84,24 @@ const dependencies: Array<Injectable> = [
     type: 'ValueProvider',
   },
   {
-    token: 'database',
+    token: 'GuildRepository',
     provider: {
-      useFactory: (): Mongoose => database,
+      useClass: DatabaseGuildRepository,
     },
-    type: 'FactoryProvider',
+    type: 'ClassProvider',
+    options: {
+      lifecycle: Lifecycle.Singleton,
+    },
+  },
+  {
+    token: 'WelcomeRepository',
+    provider: {
+      useClass: DatabaseWelcomeRepository,
+    },
+    type: 'ClassProvider',
+    options: {
+      lifecycle: Lifecycle.Singleton,
+    },
   },
   {
     token: 'ClientReady',
@@ -112,6 +128,13 @@ const dependencies: Array<Injectable> = [
     token: 'GuildMemberAdd',
     provider: {
       useClass: GuildMemberAddUseCase,
+    },
+    type: 'ClassProvider',
+  },
+  {
+    token: 'GuildCreate',
+    provider: {
+      useClass: GuildCreateUseCase,
     },
     type: 'ClassProvider',
   },

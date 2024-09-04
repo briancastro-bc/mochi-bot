@@ -23,9 +23,17 @@ const WelcomeSchema = new Schema<Welcome, Model<Welcome>>({
     required: true,
     index: true,
   },
+  color: {
+    type: Schema.Types.String,
+    required: false,
+  },
   authorName: {
     type: Schema.Types.String,
     required: true,
+  },
+  mentionUser: {
+    type: Schema.Types.Boolean,
+    default: true,
   },
   authorAvatarUrl: {
     type: Schema.Types.String,
