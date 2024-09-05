@@ -1,6 +1,5 @@
 import { 
   BaseInteraction,
-  ModalSubmitInteraction, 
 } from 'discord.js';
 import { t, } from 'i18next';
 
@@ -30,39 +29,5 @@ export class InteractionCreateUseCase implements InteractionCreatePort {
     }
 
     await command.execute(interaction);
-  }
-
-  private async handleSubmitWelcomeModal(interaction: ModalSubmitInteraction): Promise<void> {
-    const inputsFields = [
-      'title', 
-      'authorName', 
-      'authorAvatar', 
-      'description', 
-      'footer'
-    ];
-
-    const fields = Object
-      .values(inputsFields)
-      .map(v => interaction.fields.getTextInputValue(v));
-
-    const [
-      title,
-      authorName,
-      authorAvatar,
-      description,
-      footer,
-    ] = fields;
-
-    console.log('interaction', interaction);
-    console.log('fields', fields);
-
-    // const savedNewWelcome = await this.welcomeRepository.createWelcome({
-    //   guildId: interaction.guild?.id!,
-    //   channelId: interaction.
-    // });
-
-    await interaction.reply({
-      content: 'Submission received successfully',
-    });
   }
 }
