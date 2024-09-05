@@ -27,7 +27,16 @@ export class DatabaseWelcomeRepository implements WelcomeRepository {
   }
 
   async createWelcome(welcome: Welcome): Promise<any> {
-    throw new Error('Method not implemented.');
+    try {
+      const result = await WelcomeModel.create({
+        ...welcome,
+      });
+
+      return result;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
   }
 
   async updateWelcome(welcome: Welcome): Promise<any> {

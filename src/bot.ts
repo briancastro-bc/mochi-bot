@@ -8,18 +8,20 @@ import {
   Collection, 
   GatewayIntentBits,
 } from 'discord.js';
+import i18next from 'i18next';
 
 import * as ioc from '@ioc/di';
+
+import es from '@assets/locales/en.json';
+import en from '@assets/locales/es.json';
 
 import { events, } from '@src/events';
 import { commands, } from '@src/commands';
 
 const token = ioc.container.resolve<string>('token');
-const server_id = ioc.container.resolve<string>('server_id');
 const application_id = ioc.container.resolve<string>('application_id');
 
-const rest = new REST()
-  .setToken(token);
+const rest = new REST().setToken(token);
 
 async function start(): Promise<Client> {
   const client = new Client({
@@ -41,21 +43,17 @@ async function handleCommands(client: Client): Promise<Client> {
   client.commands = new Collection();
 
   for (const command of commands) {
-    client.commands.set(command.data.name, command);
+    if ('data' in command && 'execute' in command)
+      client.commands.set(command.data.name, command);
   }
 
-  const formatCommands = Object
-    .values(client.commands)
-    .map(command => command.data);
+  const applicationCommands = Object
+    .values(commands)
+    .map(command => command.data.toJSON()) as Array<unknown>;
 
   await rest.put(
-    Routes.applicationGuildCommands(
-      application_id,
-      server_id,
-    ),
-    {
-      body: formatCommands,
-    },
+    Routes.applicationCommands(application_id),
+    { body: applicationCommands, },
   );
 
   return client;
@@ -70,7 +68,21 @@ async function handleEvents(client: Client): Promise<Client> {
   return client;
 }
 
-start()
+i18next.init({
+  lng: 'es',
+  debug: true,
+  resources: {
+    en,
+    es,
+  },
+  fallbackLng: 'es',
+  returnNull: true,
+  returnObjects: true,
+  lowerCaseLng: true,
+  interpolation: {
+    escapeValue: true,
+  },
+}).then(start)
   .then(handleCommands)
   .then(handleEvents)
   .then(c => c.login(token))

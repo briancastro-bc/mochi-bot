@@ -26,6 +26,10 @@ const GuildSchema = new Schema<Guild, Model<Guild>>(
       type: Schema.Types.Number,
       default: 0,
     },
+    language: {
+      type: Schema.Types.String,
+      default: 'es',
+    },
     botNickname: {
       type: Schema.Types.String,
       required: false,
@@ -37,7 +41,11 @@ const GuildSchema = new Schema<Guild, Model<Guild>>(
     botId: {
       type: Schema.Types.String,
       required: true,
-    }
+    },
+    botPrefix: {
+      type: Schema.Types.String,
+      default: '$',
+    },
   },
   {
     timestamps: true,

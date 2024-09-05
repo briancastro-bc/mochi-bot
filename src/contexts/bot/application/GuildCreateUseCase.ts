@@ -1,4 +1,7 @@
-import { Guild, } from 'discord.js';
+import { 
+  Guild, 
+} from 'discord.js';
+import i18next from 'i18next';
 
 import { container, } from '@ioc/di';
 
@@ -17,6 +20,8 @@ export class GuildCreateUseCase implements GuildCreatePort {
 
     if (!guildFromDatabase) 
       guildFromDatabase = await this.saveGuild(guild); 
+
+    await i18next.changeLanguage(guildFromDatabase?.language);
   }
 
   private async saveGuild(guild: Guild): Promise<any> {
@@ -28,6 +33,7 @@ export class GuildCreateUseCase implements GuildCreatePort {
       name: guild.name,
       membersCount: guild.memberCount,
       botId: bot_id!,
+      language: guild?.preferredLocale,
     });
   }
 }

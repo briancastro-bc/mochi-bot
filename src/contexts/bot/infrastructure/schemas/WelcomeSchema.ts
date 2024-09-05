@@ -24,7 +24,7 @@ const WelcomeSchema = new Schema<Welcome, Model<Welcome>>({
     index: true,
   },
   color: {
-    type: Schema.Types.String,
+    type: Schema.Types.Number,
     required: false,
   },
   authorName: {
@@ -39,10 +39,9 @@ const WelcomeSchema = new Schema<Welcome, Model<Welcome>>({
     type: Schema.Types.String,
     required: false,
   },
-  roleId: {
-    type: Schema.Types.String,
+  rolesIds: {
+    type: [Schema.Types.String],
     required: false,
-    unique: true,
   },
   thumbnail: {
     type: Schema.Types.String,

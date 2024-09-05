@@ -1,14 +1,11 @@
 import { 
-  Message,
   Interaction, 
   SlashCommandBuilder, 
-  ApplicationCommandType,
-  MessageType,
 } from 'discord.js';
 
 import { container, } from '@ioc/di';
 
-import { InteractionCreatePort, } from '@application/ports/InteractionCreatePort';
+import { CommandHandler, } from '@shared/domain/CommandHandler';
 
 export type Command = {
   data: SlashCommandBuilder;
@@ -21,23 +18,39 @@ export const commands = <Array<Command>>[
       .setName('ping')
       .setDescription('Check bot availability'),
     async execute (interaction) {
-      if (interaction.isCommand && interaction.isCommand()) {
-        console.log('interaction commmand');
-      }
-
-      if (interaction.isChatInputCommand && interaction.isChatInputCommand()) {
-        console.log('interaction chat input');
-      }
-
-      if (interaction.type === MessageType.Default) {
-        console.log('interaction message');
-      }
-
-      console.log('interaction', interaction);
-      await interaction.reply('Pong!');
-      // const useCase = container
-      //   .resolve<InteractionCreatePort>('InteractionCreate');
-      // await useCase.execute(interaction);
+      const commandHandler = container.resolve<CommandHandler>('PingCommand');
+      await commandHandler.handle(interaction);
     },
   },
+  {
+    data: new SlashCommandBuilder()
+      .setName('verification')
+      .setDescription('Crear canal de verificacion')
+      .addChannelOption(
+        option => option
+          .setName('channel')
+          .setDescription('Canal donde se creara la verificacion')
+          .setRequired(true),
+      ),
+    async execute(interaction) {
+      if (!interaction.isRepliable()) return;
+
+      console.log('interaction', interaction);
+    },
+  },
+  {
+    data: new SlashCommandBuilder()
+      .setName('welcome')
+      .setDescription('Crear canal de bienvenida')
+      .addChannelOption(
+        option => option
+          .setName('channel')
+          .setDescription('Canal donde se creará la bienvenida')
+          .setRequired(true),
+      ),
+    async execute(interaction) {
+      const commandHandler = container.resolve<CommandHandler>('WelcomeCommand');
+      await commandHandler.handle(interaction);
+    }
+  }
 ];

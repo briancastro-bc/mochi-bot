@@ -2,11 +2,11 @@ export interface Welcome {
   guildId: string;
   channelId: string;
   title: string;
-  color?: string;
+  color?: number;
   authorName: string;
   mentionUser: boolean;
   authorAvatarUrl?: string;
-  roleId?: string; 
+  rolesIds?: Array<string>; 
   thumbnail?: string;
   description: string;
   footer?: string;

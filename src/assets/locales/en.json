@@ -1,5 +1,31 @@
 {
   "translation": {
-    "hello": "Hello world!"
+    "common": {
+      "welcome": "Te damos la bienvenida!"
+    },
+    "commands": {
+      "verification": {
+        "name": "verification",
+        "description": "Crear canal de verificación"
+      },
+      "unknown": "No existe el comando"
+    },
+    "welcome": {
+      "title": "Crear canal de bienvenida",
+      "titleInput": "Título",
+      "titlePlaceholder": "Ej. Bienvenido a nuestro servidor.",
+      "authorNameInput": "Nombre del servidor",
+      "authorNamePlaceholder": "Ej. My server",
+      "authorAvatarUrlInput": "Avatar de bienvenida",
+      "authorAvatarUrlPlaceholder": "Ej. https://cdn.discord.com/image.jpg",
+      "descriptionInput": "Descripci\u00f3n",
+      "descriptionPlaceholder": "",
+      "footerInput": "Pie de bienvenida",
+      "errors": {
+        "userWithoutPermissions": "No tienes permisos para crear canales de bienvenida.",
+        "noTextChannel": "Oops! El canal seleccionado no es un canal de texto."
+      }
+    },
+    "hello": "Hola mundo!"
   }
 }

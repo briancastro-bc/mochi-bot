@@ -11,12 +11,18 @@ import {
 } from 'tsyringe';
 import { constructor, } from 'tsyringe/dist/typings/types';
 
+// Commands
+import { PingCommand, } from '@application/commands/PingCommand';
+import { WelcomeCommand, } from '@application/commands/WelcomeCommand';
+
+// Use cases
 import { GuildCreateUseCase, } from '@application/GuildCreateUseCase';
 import { ClientReadyUseCase, } from '@application/ClientReadyUseCase';
 import { MessageCreateUseCase, } from '@application/MessageCreateUseCase';
 import { GuildMemberAddUseCase, } from '@application/GuildMemberAddUseCase';
 import { InteractionCreateUseCase, } from '@application/InteractionCreateUseCase';
 
+// Repositories
 import { DatabaseGuildRepository, } from '@infrastructure/repositories/DatabaseGuildRepository';
 import { DatabaseWelcomeRepository, } from '@infrastructure/repositories/DatabaseWelcomeRepository';
 
@@ -102,6 +108,20 @@ const dependencies: Array<Injectable> = [
     options: {
       lifecycle: Lifecycle.Singleton,
     },
+  },
+  {
+    token: 'PingCommand',
+    provider: {
+      useClass: PingCommand,
+    },
+    type: 'ClassProvider',
+  },
+  {
+    token: 'WelcomeCommand',
+    provider: {
+      useClass: WelcomeCommand,
+    },
+    type: 'ClassProvider',
   },
   {
     token: 'ClientReady',

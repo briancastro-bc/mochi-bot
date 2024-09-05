@@ -31,7 +31,7 @@ export class GuildMemberAddUseCase implements GuildMemberAddPort {
       authorName,
       mentionUser,
       authorAvatarUrl,
-      roleId,
+      rolesIds,
       description,
       footer,
       channelId,
@@ -47,10 +47,12 @@ export class GuildMemberAddUseCase implements GuildMemberAddPort {
     );
 
     const welcomeMessage = new EmbedBuilder()
-      .setColor(color as HexColorString ?? 'Random')
+      .setColor(color ?? 'Random')
       .setAuthor({
         name: authorName ?? t('common.welcome'),
-        iconURL: authorAvatarUrl ?? bot.displayAvatarURL()!,
+        // TODO: validate avatar url when create welcome.
+        // iconURL: authorAvatarUrl ?? bot.displayAvatarURL()!,
+        iconURL: bot.displayAvatarURL()!,
       })
       .setTitle(title)
       .setThumbnail(member.displayAvatarURL())
@@ -64,7 +66,7 @@ export class GuildMemberAddUseCase implements GuildMemberAddPort {
     
     if (footer) welcomeMessage.setFooter({ text: footer, });
 
-    if (roleId) member?.roles?.add(roleId);
+    if (rolesIds && rolesIds?.length > 0) await member?.roles?.add(rolesIds);
     
     if (!welcomeChannel.isTextBased()) return;
 

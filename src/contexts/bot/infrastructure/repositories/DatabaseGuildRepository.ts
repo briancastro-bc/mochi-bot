@@ -39,7 +39,24 @@ export class DatabaseGuildRepository implements GuildRepository {
   }
 
   async update(guild: Guild): Promise<any> {
-    throw new Error('Method not implemented.');
+    try {
+      const currentStored = await GuildModel.findOne({
+        id: guild?.id,
+      });
+
+      const result = await GuildModel.updateOne(
+        {
+          id: guild?.id,
+        },
+        {
+        ...currentStored,
+        ...guild,
+      });
+      
+      return result;
+    } catch {
+      return { success: false, };
+    }
   }
 
   async delete(guildId: string): Promise<any> {
