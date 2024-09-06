@@ -1,13 +1,14 @@
-export interface Guild {
-  id: string;
+import { Bot, } from './Bot';
+import { Model, } from './Model';
+
+export interface Guild extends Model {
   icon: string;
   name: string;
+  description: string | null;
   membersCount: number;
+  ownerId: string;
   language?: string;
-  botNickname?: string;
-  botStatus?: string;
-  botId: string;
-  botPrefix?: string;
-  createdAt?: number;
-  upatedAt?: number;
+  available: boolean;
+  banner: string | null;
+  bot: Bot;
 }

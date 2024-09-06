@@ -29,10 +29,13 @@ async function start(): Promise<Client> {
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMembers,
       GatewayIntentBits.GuildMessages,
-      GatewayIntentBits.DirectMessages,
-      GatewayIntentBits.MessageContent,
       GatewayIntentBits.GuildModeration,
       GatewayIntentBits.GuildMessageTyping,
+      GatewayIntentBits.MessageContent,
+      GatewayIntentBits.DirectMessages,
+      GatewayIntentBits.DirectMessageTyping,
+      GatewayIntentBits.AutoModerationConfiguration,
+      GatewayIntentBits.AutoModerationExecution,
     ],
   }) as Client;
 

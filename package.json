@@ -15,7 +15,7 @@
   "scripts": {
     "build": "node esbuild.config.js",
     "start": "node dist/src/bot.js",
-    "dev:tsx": "tsx -r tsconfig-paths/register --watch src/bot.ts"
+    "dev": "tsx -r tsconfig-paths/register --watch src/bot.ts"
   },
   "dependencies": {
     "discord.js": "^14.15.3",

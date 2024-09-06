@@ -26,7 +26,7 @@ export class DatabaseWelcomeRepository implements WelcomeRepository {
     }
   }
 
-  async createWelcome(welcome: Welcome): Promise<any> {
+  async create(welcome: Welcome): Promise<any> {
     try {
       const result = await WelcomeModel.create({
         ...welcome,
@@ -39,15 +39,15 @@ export class DatabaseWelcomeRepository implements WelcomeRepository {
     }
   }
 
-  async updateWelcome(welcome: Welcome): Promise<any> {
+  async update(welcome: Welcome): Promise<any> {
     throw new Error('Method not implemented.');
   }
 
-  async deleteWelcome(welcomeId: Welcome): Promise<any> {
+  async delete(welcomeId: Welcome): Promise<any> {
     throw new Error('Method not implemented.');
   }
 
-  async deleteWelcomeByGuildId(guildId: string): Promise<any> {
+  async deleteGuildId(guildId: string): Promise<any> {
     throw new Error('Method not implemented.');
   }
 }

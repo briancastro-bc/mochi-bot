@@ -15,10 +15,7 @@ export class DatabaseGuildRepository implements GuildRepository {
 
   async findById(guildId: string): Promise<Guild | null> {
     try {
-      const result = await GuildModel.findOne({
-        id: guildId,
-      });
-
+      const result = await GuildModel.findById(guildId);
       if (!result) return null;
 
       return result;
@@ -29,9 +26,7 @@ export class DatabaseGuildRepository implements GuildRepository {
 
   async create(guild: Guild): Promise<any> {
     try {
-      const result = await GuildModel.create({
-        ...guild,
-      });
+      const result = await GuildModel.create(guild);
       return result;
     } catch (err) {
       return { success: false, };
@@ -40,13 +35,11 @@ export class DatabaseGuildRepository implements GuildRepository {
 
   async update(guild: Guild): Promise<any> {
     try {
-      const currentStored = await GuildModel.findOne({
-        id: guild?.id,
-      });
+      const currentStored = await GuildModel.findById(guild?._id);
 
       const result = await GuildModel.updateOne(
         {
-          id: guild?.id,
+          _id: guild?._id,
         },
         {
         ...currentStored,

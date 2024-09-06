@@ -11,20 +11,21 @@ import {
 } from 'tsyringe';
 import { constructor, } from 'tsyringe/dist/typings/types';
 
-// Commands
 import { PingCommand, } from '@application/commands/PingCommand';
 import { WelcomeCommand, } from '@application/commands/WelcomeCommand';
 
-// Use cases
 import { GuildCreateUseCase, } from '@application/GuildCreateUseCase';
+import { GuildDeleteUseCase, } from '@application/GuildDeleteUseCase';
 import { ClientReadyUseCase, } from '@application/ClientReadyUseCase';
 import { MessageCreateUseCase, } from '@application/MessageCreateUseCase';
 import { GuildMemberAddUseCase, } from '@application/GuildMemberAddUseCase';
 import { InteractionCreateUseCase, } from '@application/InteractionCreateUseCase';
 
-// Repositories
+import { DatabaseBotRepository, } from '@infrastructure/repositories/DatabaseBotRepository';
 import { DatabaseGuildRepository, } from '@infrastructure/repositories/DatabaseGuildRepository';
 import { DatabaseWelcomeRepository, } from '@infrastructure/repositories/DatabaseWelcomeRepository';
+
+import { UsefulFunctionsRepositoryImplementation, } from '@shared/infrastructure/repositories/UsefulFunctionsRepositoryImplementation';
 
 export type InjectableType = 'constructor' 
 | 'ValueProvider' 
@@ -69,13 +70,6 @@ const dependencies: Array<Injectable> = [
     type: 'ValueProvider',
   },
   {
-    token: 'welcome_channel_id',
-    provider: {
-      useValue: process.env.DISCORD_WELCOME_CHANNEL_ID!,
-    },
-    type: 'ValueProvider',
-  },
-  {
     token: 'verification_channel_id',
     provider: {
       useValue: process.env.DISCORD_VERIFICATION_CHANNEL_ID,
@@ -103,6 +97,16 @@ const dependencies: Array<Injectable> = [
     token: 'WelcomeRepository',
     provider: {
       useClass: DatabaseWelcomeRepository,
+    },
+    type: 'ClassProvider',
+    options: {
+      lifecycle: Lifecycle.Singleton,
+    },
+  },
+  {
+    token: 'BotRepository',
+    provider: {
+      useClass: DatabaseBotRepository,
     },
     type: 'ClassProvider',
     options: {
@@ -155,6 +159,20 @@ const dependencies: Array<Injectable> = [
     token: 'GuildCreate',
     provider: {
       useClass: GuildCreateUseCase,
+    },
+    type: 'ClassProvider',
+  },
+  {
+    token: 'GuildDelete',
+    provider: {
+      useClass: GuildDeleteUseCase,
+    },
+    type: 'ClassProvider',
+  },
+  {
+    token: 'UsefulRepository',
+    provider: {
+      useClass: UsefulFunctionsRepositoryImplementation,
     },
     type: 'ClassProvider',
   },

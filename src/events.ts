@@ -11,6 +11,7 @@ import {
 import { container, } from '@ioc/di';
 
 import { GuildCreatePort, } from '@application/ports/GuildCreatePort';
+import { GuildDeletePort, } from '@application/ports/GuildDeletePort';
 import { ClientReadyPort, } from '@application/ports/ClientReadyPort';
 import { MessageCreatePort } from '@application/ports/MessageCreatePort';
 import { GuildMemberAddPort } from '@application/ports/GuildMemberAddPort';
@@ -45,22 +46,23 @@ export const events = <Array<Event>>[
     name: Events.GuildUpdate,
     once: false,
     async execute(guild) {
-      console.log('guild updated', guild);
+      // TODO:
     },
   },
   {
     name: Events.GuildDelete,
     once: false,
     async execute(guild) {
-      console.log('guild removed', guild);
+      const useCase = container
+        .resolve<GuildDeletePort>('GuildDelete');
+      await useCase.execute(guild as Guild);
     },
   },
   {
     name: Events.TypingStart,
     once: false,
     async execute(channel, user) {
-      console.log('typing channel', channel);
-      console.log('typing user', user);
+      // TODO:
     },
   },
   {

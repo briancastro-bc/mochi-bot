@@ -88,7 +88,7 @@ export class WelcomeCommand implements CommandHandler {
       footer,
     ] = fields;
 
-    const savedNewWelcome = await this.welcomeRepository.createWelcome({
+    const savedNewWelcome = await this.welcomeRepository.create({
       guildId: interaction.guild?.id!,
       channelId: targetChannel.id,
       title: title!,

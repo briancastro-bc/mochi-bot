@@ -10,6 +10,11 @@
       },
       "unknown": "No existe el comando"
     },
+    "guildCreate": {
+      "ownerTitle": "Gracias por aceptarnos.",
+      "ownerDescription": "Hola! Hemos detectado que eres el creador del servidor {{server}} y por ello, te agradecemos por aceptarnos para mejorar tu servidor. Este mensaje es para indicar que, si quieres vivir la mejor expeciencia, te recomendamos ubicarnos en la primera posición como rol de tu servidor.",
+      "ownerFooter": "Atentantemente, equipo de {{bot}}."
+    },
     "welcome": {
       "title": "Crear canal de bienvenida",
       "titleInput": "Título",
