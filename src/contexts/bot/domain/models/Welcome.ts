@@ -1,5 +1,6 @@
-export interface Welcome {
-  guildId: string;
+import { Model, } from './Model';
+
+export interface Welcome extends Model {
   channelId: string;
   title: string;
   color?: number;
@@ -7,7 +8,6 @@ export interface Welcome {
   mentionUser: boolean;
   authorAvatarUrl?: string;
   rolesIds?: Array<string>; 
-  thumbnail?: string;
   description: string;
   footer?: string;
 }

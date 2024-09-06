@@ -11,6 +11,9 @@ import {
 } from 'tsyringe';
 import { constructor, } from 'tsyringe/dist/typings/types';
 
+import { Database, } from '@shared/infrastructure/Database';
+import { UsefulFunctionsRepositoryImplementation, } from '@shared/infrastructure/repositories/UsefulFunctionsRepositoryImplementation';
+
 import { PingCommand, } from '@application/commands/PingCommand';
 import { WelcomeCommand, } from '@application/commands/WelcomeCommand';
 
@@ -19,13 +22,12 @@ import { GuildDeleteUseCase, } from '@application/GuildDeleteUseCase';
 import { ClientReadyUseCase, } from '@application/ClientReadyUseCase';
 import { MessageCreateUseCase, } from '@application/MessageCreateUseCase';
 import { GuildMemberAddUseCase, } from '@application/GuildMemberAddUseCase';
+import { ShardDisconnectUseCase, } from '@application/ShardDisconnectUseCase';
 import { InteractionCreateUseCase, } from '@application/InteractionCreateUseCase';
 
 import { DatabaseBotRepository, } from '@infrastructure/repositories/DatabaseBotRepository';
 import { DatabaseGuildRepository, } from '@infrastructure/repositories/DatabaseGuildRepository';
 import { DatabaseWelcomeRepository, } from '@infrastructure/repositories/DatabaseWelcomeRepository';
-
-import { UsefulFunctionsRepositoryImplementation, } from '@shared/infrastructure/repositories/UsefulFunctionsRepositoryImplementation';
 
 export type InjectableType = 'constructor' 
 | 'ValueProvider' 
@@ -49,16 +51,9 @@ const dependencies: Array<Injectable> = [
     type: 'ValueProvider',
   },
   {
-    token: 'prefix',
+    token: 'mongo_uri',
     provider: {
-      useValue: process.env.DISCORD_BOT_PREFIX,
-    },
-    type: 'ValueProvider',
-  },
-  {
-    token: 'server_id',
-    provider: {
-      useValue: process.env.DISCORD_SERVER_ID!,
+      useValue: process.env.MONGO_URI!,
     },
     type: 'ValueProvider',
   },
@@ -82,6 +77,16 @@ const dependencies: Array<Injectable> = [
       useValue: process.env.DISCORD_VERIFICATION_ROLE_ID,
     },
     type: 'ValueProvider',
+  },
+  {
+    token: 'DatabaseConnection',
+    provider: {
+      useClass: Database,
+    },
+    type: 'ClassProvider',
+    options: {
+      lifecycle: Lifecycle.Singleton,
+    },
   },
   {
     token: 'GuildRepository',
@@ -131,6 +136,13 @@ const dependencies: Array<Injectable> = [
     token: 'ClientReady',
     provider: {
       useClass: ClientReadyUseCase,
+    },
+    type: 'ClassProvider',
+  },
+  {
+    token: 'ShardDisconnect',
+    provider: {
+      useClass: ShardDisconnectUseCase,
     },
     type: 'ClassProvider',
   },

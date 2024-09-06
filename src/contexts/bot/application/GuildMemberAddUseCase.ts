@@ -21,7 +21,7 @@ export class GuildMemberAddUseCase implements GuildMemberAddPort {
     if (member?.user?.bot) return;
 
     const guildWelcomeChannel = await this.welcomeRepository
-      .findWelcomeByGuildId(member.guild?.id);
+      .findWelcomeById(member.guild?.id);
     
     if (!guildWelcomeChannel) return;
 

@@ -1,5 +1,12 @@
+// import { createRequire } from "node:module";
+// import { fileURLToPath } from "node:url";
+// const require = createRequire(import.meta.url);
+
 const esbuild = require('esbuild');
 const { resolve, } = require('node:path');
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = resolve(__filename, '..');
 
 (async () => {
   await esbuild.build({
@@ -17,7 +24,7 @@ const { resolve, } = require('node:path');
       '@src': resolve(__dirname, 'src'),
       '@ioc': resolve(__dirname, 'src/ioc'),
       '@db': resolve(__dirname, 'src/database'),
-      '@assets': resolve(__dirname, 'src/assets'),
+      '@locales': resolve(__dirname, 'src/locales'),
       '@shared': resolve(__dirname, 'src/contexts/shared'),
       '@domain': resolve(__dirname, 'src/contexts/bot/domain'),
       '@application': resolve(__dirname, 'src/contexts/bot/application'),

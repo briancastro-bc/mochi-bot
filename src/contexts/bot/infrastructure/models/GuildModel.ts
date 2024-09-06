@@ -1,8 +1,8 @@
-import database from '@db/client';
+import { model, } from 'mongoose';
 
 import { GuildSchema, } from '@infrastructure/schemas/GuildSchema';
 
-const GuildModel = database.model(
+const GuildModel = model(
   'Guild', 
   GuildSchema,
 );

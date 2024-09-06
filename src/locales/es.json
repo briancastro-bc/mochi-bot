@@ -8,7 +8,8 @@
         "name": "verification",
         "description": "Crear canal de verificación"
       },
-      "unknown": "No existe el comando"
+      "unknown": "No existe el comando",
+      "notPermissions": "Oops! No tienes permisos para utilizar este comando"
     },
     "guildCreate": {
       "ownerTitle": "Gracias por aceptarnos.",
@@ -28,7 +29,8 @@
       "footerInput": "Pie de bienvenida",
       "errors": {
         "userWithoutPermissions": "No tienes permisos para crear canales de bienvenida.",
-        "noTextChannel": "Oops! El canal seleccionado no es un canal de texto."
+        "noTextChannel": "Oops! El canal seleccionado no es un canal de texto.",
+        "welcomeCurrentlyCreated": "Oops! Ya se ha creado un canal de bienvenida previamente"
       }
     },
     "hello": "Hola mundo!"

@@ -1,3 +1,1 @@
-export interface UnsuccessfullyOperation {
-  success: false;
-}
+export type UnsuccessfullyOperation = false;

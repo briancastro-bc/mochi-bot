@@ -27,6 +27,8 @@ export class GuildCreateUseCase implements GuildCreatePort {
     let guildFromDatabase = await this.guildRepository.findById(guild.id);
     if (!guildFromDatabase)
       guildFromDatabase = await this.saveGuildMetadata(guild);
+    
+    if (!guildFromDatabase) throw new Error('Cant fetch o create guild in db');
 
     await changeLanguage(guildFromDatabase?.language);
 
@@ -38,9 +40,6 @@ export class GuildCreateUseCase implements GuildCreatePort {
           color: 0xcc0000,
           mentionable: true,
           hoist: true,
-          // permissions: [
-          //   PermissionFlagsBits.Administrator
-          // ],
         });
       }
 
@@ -67,8 +66,8 @@ export class GuildCreateUseCase implements GuildCreatePort {
     await this.botRepository.create<BotConfig>(metadata);
   }
 
-  private async saveGuildMetadata(metadata: Guild): Promise<GuildConfig> {
-    return await this.guildRepository.create({
+  private async saveGuildMetadata(metadata: Guild): Promise<GuildConfig | null> {
+    const result = await this.guildRepository.create<GuildConfig>({
       _id: metadata?.id,
       icon: metadata?.iconURL()!,
       name: metadata?.name,
@@ -82,5 +81,9 @@ export class GuildCreateUseCase implements GuildCreatePort {
         _id: this.botId,
       },
     });
+
+    if (!result) return null;
+
+    return result;
   }
 }

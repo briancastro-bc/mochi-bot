@@ -25,7 +25,7 @@ export class DatabaseBotRepository implements BotRepository {
       const result = await BotModel.create(bot);
       return result as T;
     } catch (e) {
-      return { success: false, };
+      return false;
     }
   }
 
@@ -33,7 +33,7 @@ export class DatabaseBotRepository implements BotRepository {
     throw new Error('Method not implemented.');
   }
 
-  async delete<T>(botId: string): Promise<T | UnsuccessfullyOperation> {
+  async delete(botId: string): Promise<any | UnsuccessfullyOperation> {
     throw new Error('Method not implemented.');
   }
 }

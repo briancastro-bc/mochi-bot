@@ -1,7 +1,7 @@
 import { 
   Model, 
   Schema,
-} from '@db/client';
+} from 'mongoose';
 
 import { Guild, } from '@domain/models/Guild';
 
@@ -35,6 +35,11 @@ const GuildSchema = new Schema<Guild, Model<Guild>>(
     bot: {
       type: Schema.Types.String,
       ref: 'Bot',
+    },
+    welcome: {
+      type: Schema.Types.String,
+      ref: 'Welcome',
+      required: false,
     },
   },
   {

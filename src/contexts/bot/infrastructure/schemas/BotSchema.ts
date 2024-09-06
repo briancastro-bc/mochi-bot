@@ -1,7 +1,7 @@
 import {
   Model,
   Schema,
-} from '@db/client';
+} from 'mongoose';
 
 import { Bot, } from '@domain/models/Bot';
 

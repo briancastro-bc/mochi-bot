@@ -1,5 +1,6 @@
 import { Bot, } from './Bot';
 import { Model, } from './Model';
+import { Welcome, } from './Welcome';
 
 export interface Guild extends Model {
   icon: string;
@@ -11,4 +12,5 @@ export interface Guild extends Model {
   available: boolean;
   banner: string | null;
   bot: Bot;
+  welcome?: Welcome;
 }

@@ -1,61 +1,46 @@
 import { 
   Model, 
   Schema,
-} from '@db/client';
+} from 'mongoose';
 
 import { Welcome, } from '@domain/models/Welcome';
 
-const WelcomeSchema = new Schema<Welcome, Model<Welcome>>({
-  guildId: { 
-    type: Schema.Types.String,
-    required: true,
-    unique: true,
-    index: true,
+const WelcomeSchema = new Schema<Welcome, Model<Welcome>>(
+  {
+    _id: Schema.Types.String,
+    channelId: {
+      type: Schema.Types.String,
+      required: true,
+      unique: true,
+      index: true,
+    },
+    title: {
+      type: Schema.Types.String,
+      required: true,
+      index: true,
+    },
+    color: Schema.Types.Number,
+    authorName: {
+      type: Schema.Types.String,
+      required: true,
+    },
+    mentionUser: {
+      type: Schema.Types.Boolean,
+      default: true,
+    },
+    authorAvatarUrl: Schema.Types.String,
+    rolesIds: [Schema.Types.String],
+    description: {
+      type: Schema.Types.String,
+      required: true,
+    },
+    footer: Schema.Types.String,
   },
-  channelId: {
-    type: Schema.Types.String,
-    required: true,
-    unique: true,
-    index: true,
-  },
-  title: {
-    type: Schema.Types.String,
-    required: true,
-    index: true,
-  },
-  color: {
-    type: Schema.Types.Number,
-    required: false,
-  },
-  authorName: {
-    type: Schema.Types.String,
-    required: true,
-  },
-  mentionUser: {
-    type: Schema.Types.Boolean,
-    default: true,
-  },
-  authorAvatarUrl: {
-    type: Schema.Types.String,
-    required: false,
-  },
-  rolesIds: {
-    type: [Schema.Types.String],
-    required: false,
-  },
-  thumbnail: {
-    type: Schema.Types.String,
-    required: false,
-  },
-  description: {
-    type: Schema.Types.String,
-    required: true,
-  },
-  footer: {
-    type: Schema.Types.String,
-    required: false,
-  },
-});
+  {
+    _id: false,
+    timestamps: true,
+  }
+);
 
 export {
   WelcomeSchema,

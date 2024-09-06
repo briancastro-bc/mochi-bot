@@ -6,5 +6,5 @@ export interface BotRepository {
   findBotByGuildId(guildId: string): Promise<Bot | null>;
   create<T>(bot: Bot): Promise<T | UnsuccessfullyOperation>;
   update<T>(bot: Bot): Promise<T | UnsuccessfullyOperation>;
-  delete<T>(botId: string): Promise<T | UnsuccessfullyOperation>;
+  delete(botId: string): Promise<any | UnsuccessfullyOperation>;
 }

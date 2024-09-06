@@ -53,7 +53,7 @@
 			"@src/*": ["./src/*"],
 			"@ioc/*": ["./src/ioc/*"],
 			"@db/*": ["./src/database/*"],
-			"@assets/*": ["./src/assets/*"],
+			"@locales/*": ["./src/locales/*"],
 			"@shared/*": ["./src/contexts/shared/*"],
 			"@domain/*": ["./src/contexts/bot/domain/*"],
 			"@application/*": ["./src/contexts/bot/application/*"],
@@ -64,7 +64,7 @@
 	"include": [
 		"./src/**/*",
 		"./@types/**/*",
-		"./src/assets/locales/*.json"
+		"./src/locales/*.json"
 	],
 	"exclude": [
 		"node_modules"

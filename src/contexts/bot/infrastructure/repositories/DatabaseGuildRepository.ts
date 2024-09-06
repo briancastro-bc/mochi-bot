@@ -1,5 +1,6 @@
 import { Guild, } from '@domain/models/Guild';
 import { GuildRepository, } from '@domain/repositories/GuildRepository';
+import { UnsuccessfullyOperation, } from '@domain/types/UnsuccesfullyOperation';
 
 import { GuildModel, } from '@infrastructure/models/GuildModel';
 
@@ -24,16 +25,16 @@ export class DatabaseGuildRepository implements GuildRepository {
     }
   }
 
-  async create(guild: Guild): Promise<any> {
+  async create<T>(guild: Guild): Promise<T | UnsuccessfullyOperation> {
     try {
       const result = await GuildModel.create(guild);
-      return result;
+      return result as T;
     } catch (err) {
-      return { success: false, };
+      return false;
     }
   }
 
-  async update(guild: Guild): Promise<any> {
+  async update<T>(guild: Guild): Promise<T | UnsuccessfullyOperation> {
     try {
       const currentStored = await GuildModel.findById(guild?._id);
 
@@ -46,20 +47,20 @@ export class DatabaseGuildRepository implements GuildRepository {
         ...guild,
       });
       
-      return result;
+      return result as T;
     } catch {
-      return { success: false, };
+      return false;
     }
   }
 
-  async delete(guildId: string): Promise<any> {
+  async delete(guildId: string): Promise<any | UnsuccessfullyOperation> {
     try {
       const result = await GuildModel.deleteOne({
-        id: guildId,
+        _id: guildId,
       });
       return result;
     } catch (err) {
-      return { success: false, };
+      return false;
     }
   }
 }

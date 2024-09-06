@@ -1,8 +1,8 @@
-import database from '@db/client';
+import { model, } from 'mongoose';
 
 import { BotSchema, } from '@infrastructure/schemas/BotSchema';
 
-const BotModel = database.model(
+const BotModel = model(
   'Bot', 
   BotSchema,
 );

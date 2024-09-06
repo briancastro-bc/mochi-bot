@@ -1,14 +1,13 @@
 import { 
-  ModalBuilder, 
   ChannelType,
-  TextInputBuilder,
+  TextChannel, 
+  ModalBuilder, 
   TextInputStyle,
+  TextInputBuilder,
   ActionRowBuilder,
+  ModalSubmitInteraction,
   ChatInputCommandInteraction,
   ModalActionRowComponentBuilder,
-  ModalSubmitInteraction,
-  Channel,
-  TextChannel, 
 } from 'discord.js';
 import { t, } from 'i18next';
 
@@ -27,7 +26,7 @@ export class WelcomeCommand implements CommandHandler {
     if (!interaction.memberPermissions?.has('Administrator')) {
       await interaction.reply({
         ephemeral: true,
-        content: 'No tienes permisos para usar este comando',
+        content: t('commands.notPermissions'),
       });
 
       return;
@@ -37,16 +36,16 @@ export class WelcomeCommand implements CommandHandler {
 
     if (channel?.type !== ChannelType.GuildText) {
       await interaction.reply({
-        content: 'El canal que has seleccionado no es de texto',
+        content: t('welcome.errors.notTextChannel'),
       });
 
       return;
     };
 
-    const currentWelcomeChannel = await this.welcomeRepository.findWelcomeByGuildId(interaction?.guild?.id!);
+    const currentWelcomeChannel = await this.welcomeRepository.findWelcomeById(interaction?.guild?.id!);
     if (currentWelcomeChannel) {
       await interaction.reply({
-        content: 'El servidor ya tiene un canal de bienvenida establecido',
+        content: t('welcome.errors.welcomeCurrentlyCreated'),
       });
 
       return;
@@ -89,7 +88,7 @@ export class WelcomeCommand implements CommandHandler {
     ] = fields;
 
     const savedNewWelcome = await this.welcomeRepository.create({
-      guildId: interaction.guild?.id!,
+      _id: interaction.guild?.id!,
       channelId: targetChannel.id,
       title: title!,
       authorName: authorName!,

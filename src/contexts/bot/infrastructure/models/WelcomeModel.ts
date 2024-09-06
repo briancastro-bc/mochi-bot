@@ -1,8 +1,8 @@
-import database from '@db/client';
+import { model, } from 'mongoose';
 
 import { WelcomeSchema, } from '@infrastructure/schemas/WelcomeSchema';
 
-const WelcomeModel = database.model(
+const WelcomeModel = model(
   'Welcome',
   WelcomeSchema,
 );

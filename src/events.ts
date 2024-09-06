@@ -15,6 +15,7 @@ import { GuildDeletePort, } from '@application/ports/GuildDeletePort';
 import { ClientReadyPort, } from '@application/ports/ClientReadyPort';
 import { MessageCreatePort } from '@application/ports/MessageCreatePort';
 import { GuildMemberAddPort } from '@application/ports/GuildMemberAddPort';
+import { ShardDisconnectPort, } from '@application/ports/ShardDisconnectPort';
 import { InteractionCreatePort, } from '@application/ports/InteractionCreatePort';
 
 export type Event = {
@@ -32,6 +33,15 @@ export const events = <Array<Event>>[
         .resolve<ClientReadyPort>('ClientReady');
       await useCase.execute(client as Client);
     },
+  },
+  {
+    name: Events.ShardDisconnect,
+    once: true,
+    async execute() {
+      const useCase = container
+        .resolve<ShardDisconnectPort>('ShardDisconnect');
+      await useCase.execute();
+    }
   },
   {
     name: Events.GuildCreate,
