@@ -31,7 +31,7 @@ export class GuildMemberAddUseCase implements GuildMemberAddPort {
       authorName,
       mentionUser,
       authorAvatarUrl,
-      rolesIds,
+      roles: rolesIds,
       description,
       footer,
       channelId,

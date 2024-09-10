@@ -17,13 +17,13 @@ import { UsefulFunctionsRepositoryImplementation, } from '@shared/infrastructure
 import { PingCommand, } from '@application/commands/PingCommand';
 import { WelcomeCommand, } from '@application/commands/WelcomeCommand';
 
-import { GuildCreateUseCase, } from '@application/GuildCreateUseCase';
-import { GuildDeleteUseCase, } from '@application/GuildDeleteUseCase';
-import { ClientReadyUseCase, } from '@application/ClientReadyUseCase';
-import { MessageCreateUseCase, } from '@application/MessageCreateUseCase';
-import { GuildMemberAddUseCase, } from '@application/GuildMemberAddUseCase';
-import { ShardDisconnectUseCase, } from '@application/ShardDisconnectUseCase';
-import { InteractionCreateUseCase, } from '@application/InteractionCreateUseCase';
+import { GuildCreateUseCase, } from '@application/usecases/GuildCreateUseCase';
+import { GuildDeleteUseCase, } from '@application/usecases/GuildDeleteUseCase';
+import { ClientReadyUseCase, } from '@application/usecases/ClientReadyUseCase';
+import { MessageCreateUseCase, } from '@application/usecases/MessageCreateUseCase';
+import { GuildMemberAddUseCase, } from '@application/usecases/GuildMemberAddUseCase';
+import { ShardDisconnectUseCase, } from '@application/usecases/ShardDisconnectUseCase';
+import { InteractionCreateUseCase, } from '@application/usecases/InteractionCreateUseCase';
 
 import { DatabaseBotRepository, } from '@infrastructure/repositories/DatabaseBotRepository';
 import { DatabaseGuildRepository, } from '@infrastructure/repositories/DatabaseGuildRepository';

@@ -70,7 +70,7 @@ async function handleCommands(client: Client): Promise<Client> {
 start()
   .then(handleEvents)
   .then(handleCommands)
-  .then(c => c.login(token))
+  .then(client => client.login(token))
   .catch((err) => {
     console.log(err);
     process.exit(1)

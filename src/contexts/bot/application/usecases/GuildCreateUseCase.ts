@@ -54,7 +54,7 @@ export class GuildCreateUseCase implements GuildCreatePort {
       await bot.roles.add(botRole);
 
       await this.saveBotMetadata({
-        _id: bot?.id,
+        _id: guildFromDatabase._id,
       });
     } catch (e) {
       // TODO: create event channel for show errors.
@@ -78,7 +78,7 @@ export class GuildCreateUseCase implements GuildCreatePort {
       available: metadata?.available,
       banner: metadata?.banner,
       bot: {
-        _id: this.botId,
+        _id: metadata?.id,
       },
     });
 

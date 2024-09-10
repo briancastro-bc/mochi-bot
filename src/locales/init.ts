@@ -10,7 +10,6 @@ export async function initializeI18n(): Promise<TFunction> {
     .use(Backend)
     .init<FsBackendOptions>({
       lng: 'es',
-      debug: true,
       backend: {
         loadPath: path.resolve(__dirname, '{{lng}}.json'),
       },

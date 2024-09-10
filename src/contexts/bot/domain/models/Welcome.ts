@@ -7,7 +7,7 @@ export interface Welcome extends Model {
   authorName: string;
   mentionUser: boolean;
   authorAvatarUrl?: string;
-  rolesIds?: Array<string>; 
+  roles?: Array<string>; 
   description: string;
   footer?: string;
 }

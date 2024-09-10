@@ -3,6 +3,7 @@ import { WelcomeRepository, } from '@domain/repositories/WelcomeRepository';
 import { UnsuccessfullyOperation, } from '@domain/types/UnsuccesfullyOperation';
 
 import { WelcomeModel, } from '@infrastructure/models/WelcomeModel';
+import { escapeInlineCode } from 'discord.js';
 
 export class DatabaseWelcomeRepository implements WelcomeRepository {
   async findWelcomeById(id: string): Promise<Welcome | null> {
@@ -23,6 +24,26 @@ export class DatabaseWelcomeRepository implements WelcomeRepository {
 
       return result as T;
     } catch (err) {
+      return false;
+    }
+  }
+
+  async createOrUpdate<T>(welcome: Welcome): Promise<T | UnsuccessfullyOperation> {
+    try {
+      return await WelcomeModel.updateOne(
+        {
+          _id: welcome?._id,
+        },
+        {
+          ...welcome,
+        },
+        {
+          upsert: true,
+        }
+      ) as T;
+    } catch (err) {
+      console.log('err', err);
+
       return false;
     }
   }

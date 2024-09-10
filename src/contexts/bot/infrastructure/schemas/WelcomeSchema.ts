@@ -29,7 +29,7 @@ const WelcomeSchema = new Schema<Welcome, Model<Welcome>>(
       default: true,
     },
     authorAvatarUrl: Schema.Types.String,
-    rolesIds: [Schema.Types.String],
+    roles: [Schema.Types.String],
     description: {
       type: Schema.Types.String,
       required: true,
